@@ -85,14 +85,27 @@ namespace PDF2ImageTest
                 
                 var stopwatch = Stopwatch.StartNew();
 
-                // 调用核心转换方法
-                var generatedFiles = await PDFTools.Convert.Convert.ToImagesAsync(
-                    pdfFilePaths,
-                    outputDirectory,
-                    dpi: dpi,
-                    imageFormat: format,
-                    quality: quality
-                );
+                int totalGeneratedFiles = 0;
+
+                foreach (var pdfFilePath in pdfFilePaths)
+                {
+                    string pdfFileName = Path.GetFileNameWithoutExtension(pdfFilePath);
+                    string pdfOutputDirectory = Path.Combine(outputDirectory, pdfFileName);
+
+                    Directory.CreateDirectory(pdfOutputDirectory);
+
+                    Console.WriteLine($"正在转换: {pdfFileName}");
+
+                    var generatedFiles = await PDFTools.Convert.Convert.ToImagesAsync(
+                        new List<string> { pdfFilePath },
+                        pdfOutputDirectory,
+                        dpi: dpi,
+                        imageFormat: format,
+                        quality: quality
+                    );
+
+                    totalGeneratedFiles += generatedFiles.Count;
+                }
 
                 stopwatch.Stop();
                 
@@ -100,7 +113,7 @@ namespace PDF2ImageTest
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("转换成功！");
                 Console.ResetColor();
-                Console.WriteLine($"处理了 {pdfFilePaths.Count} 个PDF文件，生成了 {generatedFiles.Count} 个图像文件。");
+                Console.WriteLine($"处理了 {pdfFilePaths.Count} 个PDF文件，生成了 {totalGeneratedFiles} 个图像文件。");
                 Console.WriteLine($"总耗时: {stopwatch.Elapsed.TotalSeconds:F2} 秒。");
 
             }
