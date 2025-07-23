@@ -114,15 +114,15 @@ PDF2ImageTest.exe <输入PDF文件或文件夹> <输出目录> [DPI] [格式] [�
 
 ### 2. 使用方法
 
-`PDFTools.Convert.Convert` 静态类提供了两个核心的异步方法。
+`PDFTools.Core` 静态类提供了两个核心的异步方法。
 
-#### **`ToImageAsync`**
+#### **`PDFToImageAsync`**
 
 将单个 PDF 文档转换为一系列图像文件。
 
 *   **签名**:
     ```csharp
-    public static Task<List<string>> ToImageAsync(
+    public static Task<List<string>> PDFToImageAsync(
         string pdfFilePath,
         string outputDirectory,
         int dpi = 150,
@@ -151,7 +151,7 @@ PDF2ImageTest.exe <输入PDF文件或文件夹> <输出目录> [DPI] [格式] [�
         {
             try
             {
-                var generatedFiles = await Convert.ToImageAsync(
+                var generatedFiles = await Convert.PDFToImageAsync(
                     @"C:\MyDocs\sample.pdf",
                     @"C:\Output"
                 );
@@ -176,7 +176,7 @@ PDF2ImageTest.exe <输入PDF文件或文件夹> <输出目录> [DPI] [格式] [�
 
 *   **签名**:
     ```csharp
-    public static Task<List<string>> ToImagesAsync(
+    public static Task<List<string>> PDFToImagesAsync(
         IEnumerable<string> pdfFilePaths,
         string outputDirectory,
         int dpi = 150,
@@ -212,7 +212,7 @@ PDF2ImageTest.exe <输入PDF文件或文件夹> <输出目录> [DPI] [格式] [�
 
             try
             {
-                var allGeneratedFiles = await Convert.ToImagesAsync(
+                var allGeneratedFiles = await Convert.PDFToImagesAsync(
                     myPdfList,
                     @"C:\BatchOutput",
                     dpi: 200,
