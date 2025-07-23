@@ -6,15 +6,15 @@
 一个简单、高效且现代化的 .NET 8 工具，用于将 PDF 文件转换为各种主流图片格式。它包含一个核心类库 (`PDFTools`) 和一个易于使用的命令行工具 (`PDF2ImageTest`)，详见[PDFTools类库说明](./src/PDFTools/README.md)
 
 ## API 说明
-`PDFTools.Convert` 静态类提供了两个核心的异步方法。
+`PDFTools.Core` 静态类提供了两个核心的异步方法。
 
-### **`ToImageAsync`**
+### **`PDFToImageAsync`**
 
 将单个 PDF 文档转换为一系列图像文件。
 
 *   **签名**:
     ```csharp
-    public static Task<List<string>> ToImageAsync(
+    public static Task<List<string>> PDFToImageAsync(
         string pdfFilePath,
         string outputDirectory,
         int dpi = 150,
@@ -31,13 +31,13 @@
 
 *   **返回**: 一个任务，完成后返回一个包含所有生成图像文件绝对路径的列表。
 
-### **`ToImagesAsync`**
+### **`PDFToImagesAsync`**
 
 将多个 PDF 文档并行转换为图像文件。
 
 *   **签名**:
     ```csharp
-    public static Task<List<string>> ToImagesAsync(
+    public static Task<List<string>> PDFToImagesAsync(
         IEnumerable<string> pdfFilePaths,
         string outputDirectory,
         int dpi = 150,
