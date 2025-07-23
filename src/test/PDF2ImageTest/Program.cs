@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 // 使用我们创建的类库的命名空间
-using PDFTools.Convert;
+using PDFTools.Core;
 
 namespace PDF2ImageTest
 {
@@ -96,7 +96,7 @@ namespace PDF2ImageTest
 
                     Console.WriteLine($"正在转换: {pdfFileName}");
 
-                    var generatedFiles = await PDFTools.Convert.Convert.ToImagesAsync(
+                    var generatedFiles = await PDFTools.Core.Convert.PDFToImagesAsync(
                         new List<string> { pdfFilePath },
                         pdfOutputDirectory,
                         dpi: dpi,
