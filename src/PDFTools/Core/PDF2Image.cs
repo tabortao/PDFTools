@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using PDFtoImage; // Import the PDFtoImage library
 using SkiaSharp; // Import SkiaSharp for RenderOptions and SKBitmap
 
-namespace PDFTools.Convert
+namespace PDFTools.Core
 {
     /// <summary>
     /// 提供 PDF 文件转换的静态工具方法。
@@ -123,7 +123,7 @@ namespace PDFTools.Convert
         /// <exception cref="ArgumentException">如果 imageFormat 不支持。</exception>
         /// <exception cref="DirectoryNotFoundException">如果 outputDirectory 路径无效且无法创建。</exception>
         /// <exception cref="Exception">在转换过程中发生其他错误。</exception>
-        public static Task<List<string>> ToImageAsync(
+        public static Task<List<string>> PDFToImageAsync(
             string pdfFilePath,
             string outputDirectory,
             int dpi = 150,
@@ -151,7 +151,7 @@ namespace PDFTools.Convert
         /// <exception cref="ArgumentException">如果 imageFormat 不支持。</exception>
         /// <exception cref="DirectoryNotFoundException">如果 outputDirectory 路径无效且无法创建。</exception>
         /// <exception cref="Exception">在转换过程中发生其他错误。</exception>
-        public static async Task<List<string>> ToImagesAsync(
+        public static async Task<List<string>> PDFToImagesAsync(
             IEnumerable<string> pdfFilePaths,
             string outputDirectory,
             int dpi = 150,
@@ -206,7 +206,7 @@ namespace PDFTools.Convert
                         try
                         {
                             // Call the single PDF conversion method
-                            return await ToImageAsync( // Now calling the re-added ToImageAsync
+                            return await PDFToImageAsync( // Now calling the re-added ToImageAsync
                                 filePath,
                                 outputDirectory,
                                 dpi,
